@@ -1,0 +1,107 @@
+DATABASE SCHEMA
+===============
+
+Database: data/imports/merged/merged_data.db
+Table: merged_imports
+Total Rows: 9,509,593
+Database Size: ~2.88 GB
+
+COLUMNS (26):
+-------------
+Note: Columns are ordered for optimal analysis workflow
+
+1.  FECHA_IMPORTACION_EXPORTACION (TIMESTAMP)
+    - Import/Export date
+
+2.  IMPORTADOR_EXPORTADOR (TEXT)
+    - Importer/Exporter name
+
+3.  PAIS_DE_PROCEDENCIA_DESTINO (TEXT)
+    - Country of origin/destination
+    - Renamed from PAÍS_DE_PROCEDENCIA_DESTINO (removed accent)
+
+4.  COD_INCISO (INTEGER)
+    - Subsection code
+
+5.  COD_CAPITULO (INTEGER)
+    - Chapter code
+
+6.  COD_PARTIDA (INTEGER)
+    - Item code
+
+7.  COD_SUBPARTIDA (INTEGER)
+    - Sub-item code
+
+8.  CATEGORIA (TEXT)
+    - Category
+
+9.  DESCRIPCIÓN (TEXT)
+    - Description
+
+10. PUNTO_ENTRADA_PAIS (TEXT)
+    - Entry point to country
+
+11. PRECIO_UNIDAD (REAL)
+    - Price per unit
+    - Calculated as: TOTAL_A_PAGAR / CANTIDAD
+    - NULL when CANTIDAD is 0 or NULL
+    - 9,509,145 rows have values
+    - 448 rows are NULL
+
+12. CANTIDAD (REAL)
+    - Quantity of items
+
+13. UNIDAD (TEXT)
+    - Unit of measurement
+
+14. PESO_NETO (REAL)
+    - Net weight
+
+15. PESO_BRUTO (REAL)
+    - Gross weight
+
+16. VALOR_FOB (REAL)
+    - FOB value
+
+17. VALOR_FLETE (REAL)
+    - Freight value
+
+18. VALOR_SEGURO (REAL)
+    - Insurance value
+
+19. VALOR_CIF (REAL)
+    - CIF value
+
+20. IMPUESTO_IMPORTACION (REAL)
+    - Import tax
+
+21. ITBMS (REAL)
+    - ITBMS tax
+
+22. IMP_PROTECCION_PETROLEO (REAL)
+    - Petroleum protection tax
+
+23. IMPUESTOS_ISC (REAL)
+    - ISC taxes
+
+24. TOTAL_A_PAGAR (REAL)
+    - Total amount to pay
+
+25. MODO_TRANSPORTE (TEXT)
+    - Transportation mode
+    - Note: Only present in some years (2021, 2023, 2025)
+
+26. source_file (TEXT)
+    - Source XLSX file name
+    - Added during merge to track data origin
+
+STATISTICS:
+-----------
+
+PRECIO_UNIDAD:
+- Minimum: 0.00
+- Maximum: 1,856,836.84
+- Average: 134.46
+- Non-NULL values: 9,509,145 (99.995%)
+- NULL values: 448 (0.005%)
+

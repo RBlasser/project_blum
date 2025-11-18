@@ -1,0 +1,71 @@
+CHAPTER 06 - PLANTAS VIVAS Y PRODUCTOS DE LA FLORICULTURA
+====================================================================================================
+
+--- PAGE 27 ---
+1.
+1.
+2. PRODUCTOS DEL REINO VEGETAL
+Notas.Capítulo 6
+Plantas vivas y productos de la floriculturaSección II
+Salvo lo dispuesto en la segunda parte de la partida 06.01, este Capítulo comprende únicamente los productos suministrados habitualmente por los 
+horticultores, viveristas o floristas para la plantación o la ornamentación.  Sin embargo, se excluyen de este Capítulo las patatas (papas)*, cebollas 
+hortenses, chalotes, ajos y demás productos del Capítulo 7.
+Los ramos, cestas, coronas y artículos similares se asimilan a las flores o follajes de las partidas 06.03 o 06.04, sin tener en cuenta los accesorios de 
+otras materias.  Sin embargo, estas partidas no comprenden los collages y cuadros similares de la partida 97.01.Nota.
+En esta Sección el término « pellets» designa los productos en forma de cilindro, bolita, etc., aglomerados  por  simple presión  o con adición de un 
+aglutinante en proporción inferior o igual al    3 % en peso.
+CÓDIGO DESCRIPCIÓN DAI     % ITBMS ISC ICCDP
+06.01Bulbos, cebollas, tubérculos, raíces y bulbos tuberosos, turiones y rizomas, en reposo
+vegetativo, en vegetación o en flor; plantas y raíces de achicoria, excepto las raíces de la
+partida 12.12.
+0601.10.00.00.00 - Bulbos, cebollas, tubérculos, raíces y bulbos tuberosos, turiones y rizomas, en reposo vegetativo 0 0 0 0
+0601.20.00.00.00 -Bulbos, cebollas, tubérculos, raíces y bulbos tuberosos, turiones y rizomas, en vegetación o en flor;
+plantas y raíces de achicoria0 0 0 0
+06.02 Las demás plantas vivas (incluidas sus raíces), esquejes e injertos; micelios.
+0602.10.00.00.00 - Esquejes sin enraizar e injertos 0 0 0 0
+0602.20 - Árboles, arbustos y matas, de frutas o de otros frutos comestibles, incluso injertados:
+0602.20.10.00.00 - - Plántulas 10 0 0 0
+0602.20.90.00.00 - - Otros 0 0 0 0
+0602.30.00.00.00 - Rododendros y azaleas, incluso injertados 0 0 0 0
+0602.40.00.00.00 - Rosales, incluso injertados 0 0 0 0
+0602,90 - Los demás:
+0602.90.10.00.00 - - Plántulas de hortalizas y tabaco 10 0 0 0
+0602.90.90.00.00 - - Otros 0 0 0 0
+06.03Flores y capullos, cortados para ramos o adornos, frescos, secos, blanqueados, teñidos,
+impregnados o preparados  de otra forma.
+0603,1 - Frescos:
+0603.11.00.00.00 - - Rosas 15 0 0 0
+0603.12.00.00.00 - - Claveles 15 0 0 0
+0603.13.00.00.00 - - Orquídeas 15 0 0 0
+0603.14.00.00.00 - - Crisantemos 15 0 0 0
+0603.15.00.00.00 - - Azucenas (Lilium spp.) 15 0 0 0
+0603,19 - - Los demás:
+0603.19.10.00.00 - - - Ginger 15 0 0 0
+--- PAGE 28 ---
+0603.19.20.00.00 - - - Ave del paraíso 15 0 0 0
+0603.19.30.00.00 - - - Calas 15 0 0 0
+0603.19.50.00.00 - - - Sysofilia 15 0 0 0
+0603.19.60.00.00 - - - Serberas 15 0 0 0
+0603.19.70.00.00 - - - Estaticias 15 0 0 0
+0603.19.80.00.00 - - - Astromerias 15 0 0 0
+0603.19.9 - - - Otros:
+0603.19.91.00.00 - - - - Agapantos 15 0 0 0
+0603.19.92.00.00 - - - - Gladiolas 15 0 0 0
+0603.19.93.00.00 - - - - Anturios 15 0 0 0
+0603.19.94.00.00 - - - - Heliconias 15 0 0 0
+0603.19.99.00.00 - - - - Los demás 15 0 0 0
+0603,90 - Los demás:
+0603.90.10.00.00 - - Arreglos florales 15 0 0 0
+0603.90.90.00.00 - - Otros 15 0 0 0
+06.04Follaje, hojas, ramas y demás partes de plantas, sin flores ni capullos, y hierbas, musgos y
+líquenes, para ramos o adornos, frescos, secos, blanqueados, teñidos, impregnados o
+preparados de otra forma.
+0604,20 - Frescos:
+0604.20.10.00.00 - - Árboles de Navidad 5 0 0 0
+0604.20.90.00 - - Los demás:  
+0604.20.90.00.10 - - - Únicamente arreglos 15 0 0 0
+0604.20.90.00.90 - - - Los demás 15 0 0 0
+0604.90 -  Los demás:
+0604.90.10.00.00 - - Musgos y líquenes 15 0 0 0 0604.90.10.00.00 - - Musgos y líquenes 15 0 0 0
+0604.90.20.00.00 - - Arreglos 15 0 0 0
+0604.90.90.00.00 - - Otros 15 0 0 0

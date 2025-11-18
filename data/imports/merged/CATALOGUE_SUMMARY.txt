@@ -1,0 +1,135 @@
+================================================================================
+TARIFF CATALOGUE - IMPLEMENTATION SUMMARY
+================================================================================
+
+CREATED: 2025-11-18
+SOURCE: data/docs/arancel_2025.pdf (452 pages)
+DATABASE: data/imports/merged/merged_data.db
+
+================================================================================
+CATALOGUE TABLE: catalogo_arancel
+================================================================================
+
+STATISTICS:
+-----------
+Total Tariff Codes:     9,040
+Unique Chapters:        97
+Unique Partidas:        1,156
+Unique Subpartidas:     5,262
+
+COLUMNS:
+--------
+1. COD_INCISO (INTEGER, PRIMARY KEY) - Full tariff code
+2. COD_CAPITULO (INTEGER, INDEXED) - Chapter (2 digits)
+3. COD_PARTIDA (INTEGER, INDEXED) - Heading (4 digits)
+4. COD_SUBPARTIDA (INTEGER, INDEXED) - Subheading (6 digits)
+5. DESCRIPCIÓN (TEXT) - Official description
+6. DAI (TEXT) - Import duty rate
+7. ITBMS (REAL) - Tax percentage
+8. ISC (REAL) - Selective consumption tax
+9. ICCDP (REAL) - Other tax
+10. CAPITULO_NOMBRE (TEXT) - Chapter name
+
+================================================================================
+JOIN CAPABILITY
+================================================================================
+
+PRIMARY JOIN KEY: COD_INCISO
+
+BASIC SYNTAX:
+-------------
+SELECT * 
+FROM merged_imports i
+LEFT JOIN catalogo_arancel c ON i.COD_INCISO = c.COD_INCISO
+
+MATCH RATE:
+-----------
+~78% of import codes match with catalogue
+~22% unmatched (may be outdated codes or different formats)
+
+================================================================================
+CHAPTER 6: FLOWERS & PLANTS (EXAMPLE)
+================================================================================
+
+OFFICIAL CODES FOR FRESH CUT FLOWERS:
+--------------------------------------
+60311000000 - Rosas (Roses) - 15% DAI
+60312000000 - Claveles (Carnations) - 15% DAI
+60313000000 - Orquídeas (Orchids) - 15% DAI
+60314000000 - Crisantemos (Chrysanthemums) - 15% DAI
+60315000000 - Azucenas/Lilium (Lilies) - 15% DAI
+60319100000 - Ginger - 15% DAI
+60319200000 - Ave del paraíso (Bird of Paradise) - 15% DAI
+60319300000 - Calas (Calla lilies) - 15% DAI
+60319500000 - Gypsophila - 15% DAI
+60319600000 - Gerberas - 15% DAI
+60319700000 - Estaticias (Statice) - 15% DAI
+60319800000 - Astromelias (Alstroemeria) - 15% DAI
+60319910000 - Agapantos (Agapanthus) - 15% DAI
+60319920000 - Gladiolas (Gladiolus) - 15% DAI
+60319930000 - Anturios (Anthuriums) - 15% DAI
+60319940000 - Heliconias - 15% DAI
+60319990000 - Los demás (Others) - 15% DAI
+
+EXAMPLE QUERY - Find all flower imports:
+-----------------------------------------
+SELECT 
+    i.FECHA_IMPORTACION_EXPORTACION,
+    i.IMPORTADOR_EXPORTADOR,
+    c.DESCRIPCIÓN as producto_oficial,
+    i.CANTIDAD,
+    i.PRECIO_UNIDAD,
+    i.TOTAL_A_PAGAR,
+    c.DAI as tarifa_oficial
+FROM merged_imports i
+INNER JOIN catalogo_arancel c ON i.COD_INCISO = c.COD_INCISO
+WHERE c.COD_CAPITULO = 6
+
+================================================================================
+EXPORTED FILES
+================================================================================
+
+1. catalogo_arancel.csv
+   - Complete catalogue (9,040 codes)
+   - All chapters, all products
+   - Location: data/imports/merged/
+
+2. CATALOGUE_DOCUMENTATION.md
+   - Detailed documentation
+   - Usage examples
+   - Location: augment_scripts/
+
+================================================================================
+SCRIPTS AVAILABLE
+================================================================================
+
+1. extract_arancel_catalogue.py - Extract catalogue from PDF
+2. test_catalogue_joins.py - Test JOIN operations
+3. demo_flower_joins.py - Demonstrate flower analysis
+4. check_chapter_6.py - Analyze Chapter 6 specifically
+5. final_catalogue_summary.py - Generate summary reports
+
+================================================================================
+NEXT STEPS FOR AGRICULTURAL ANALYSIS
+================================================================================
+
+To identify all agricultural products (flowers, vegetables, fruits, etc.):
+
+1. Query relevant chapters:
+   - Chapter 6: Live plants and flowers
+   - Chapter 7: Vegetables
+   - Chapter 8: Fruits and nuts
+   - Chapter 9: Coffee, tea, spices
+   - Chapter 10: Cereals
+   - Chapter 12: Seeds and plants for agriculture
+
+2. Use JOIN to get official descriptions:
+   SELECT * FROM catalogo_arancel
+   WHERE COD_CAPITULO IN (6, 7, 8, 9, 10, 12)
+
+3. Match with import data to analyze volumes and values
+
+================================================================================
+✓ CATALOGUE READY FOR USE
+================================================================================
+

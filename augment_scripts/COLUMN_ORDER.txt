@@ -1,0 +1,55 @@
+MERGED_IMPORTS TABLE - COLUMN ORDER
+====================================
+
+Database: data/imports/merged/merged_data.db
+Table: merged_imports
+Total Rows: 9,509,593
+Total Columns: 26
+
+COLUMN ORDER (optimized for analysis):
+---------------------------------------
+
+ 1. FECHA_IMPORTACION_EXPORTACION
+ 2. IMPORTADOR_EXPORTADOR
+ 3. PAIS_DE_PROCEDENCIA_DESTINO (renamed from PAÍS_DE_PROCEDENCIA_DESTINO)
+ 4. COD_INCISO
+ 5. COD_CAPITULO
+ 6. COD_PARTIDA
+ 7. COD_SUBPARTIDA
+ 8. CATEGORIA
+ 9. DESCRIPCIÓN
+10. PUNTO_ENTRADA_PAIS
+11. PRECIO_UNIDAD (calculated column)
+12. CANTIDAD
+13. UNIDAD
+14. PESO_NETO
+15. PESO_BRUTO
+16. VALOR_FOB
+17. VALOR_FLETE
+18. VALOR_SEGURO
+19. VALOR_CIF
+20. IMPUESTO_IMPORTACION
+21. ITBMS
+22. IMP_PROTECCION_PETROLEO
+23. IMPUESTOS_ISC
+24. TOTAL_A_PAGAR
+25. MODO_TRANSPORTE
+26. source_file
+
+CHANGES MADE:
+-------------
+
+1. Reordered columns for better analysis workflow:
+   - Date and identification fields first
+   - Product classification codes grouped together
+   - Calculated price per unit placed before quantity
+   - Weight and value fields grouped logically
+   - Tax fields grouped together
+   - Metadata fields (source_file) at the end
+
+2. Renamed column:
+   - PAÍS_DE_PROCEDENCIA_DESTINO → PAIS_DE_PROCEDENCIA_DESTINO
+   - Removed accent for better compatibility
+
+3. All 9,509,593 rows preserved during reordering
+
