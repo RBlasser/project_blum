@@ -21,13 +21,13 @@ conn = get_connection()
 @st.cache_data
 def get_product_types():
     query = """
-    SELECT DISTINCT tipo_producto 
-    FROM flowers_greens 
-    WHERE tipo_producto IS NOT NULL
-    ORDER BY tipo_producto
+    SELECT DISTINCT producto_normalizado
+    FROM flowers_greens
+    WHERE producto_normalizado IS NOT NULL
+    ORDER BY producto_normalizado
     """
     df = pd.read_sql(query, conn)
-    return ['All Products'] + df['tipo_producto'].tolist()
+    return ['All Products'] + df['producto_normalizado'].tolist()
 
 # Sidebar
 st.sidebar.title("🌱 Filters")
@@ -62,14 +62,14 @@ with tab1:
         df_monthly = pd.read_sql(query, conn)
     else:
         query = """
-        SELECT 
+        SELECT
             strftime('%Y-%m', FECHA_IMPORTACION_EXPORTACION) as month,
             SUM(CANTIDAD) as volume,
             SUM(PRECIO_UNIDAD * CANTIDAD) / NULLIF(SUM(CANTIDAD), 0) as weighted_avg_price,
             SUM(TOTAL_A_PAGAR) as total_value,
             COUNT(*) as num_shipments
         FROM flowers_greens
-        WHERE tipo_producto = ? AND FECHA_IMPORTACION_EXPORTACION IS NOT NULL
+        WHERE producto_normalizado = ? AND FECHA_IMPORTACION_EXPORTACION IS NOT NULL
         GROUP BY month
         ORDER BY month
         """
@@ -130,13 +130,13 @@ with tab2:
         df_importers = pd.read_sql(query, conn)
     else:
         query = """
-        SELECT 
+        SELECT
             IMPORTADOR_EXPORTADOR as importer,
             COUNT(*) as shipments,
             SUM(CANTIDAD) as volume,
             SUM(TOTAL_A_PAGAR) as total_value
         FROM flowers_greens
-        WHERE tipo_producto = ? AND IMPORTADOR_EXPORTADOR IS NOT NULL
+        WHERE producto_normalizado = ? AND IMPORTADOR_EXPORTADOR IS NOT NULL
         GROUP BY IMPORTADOR_EXPORTADOR
         ORDER BY volume DESC
         LIMIT 30
@@ -170,16 +170,16 @@ with tab3:
     
     # Query product data
     query = """
-    SELECT 
-        tipo_producto,
+    SELECT
+        producto_normalizado,
         categoria_agricola,
         COUNT(*) as shipments,
         SUM(CANTIDAD) as volume,
         SUM(TOTAL_A_PAGAR) as total_value,
         AVG(PRECIO_UNIDAD) as avg_price
     FROM flowers_greens
-    WHERE tipo_producto IS NOT NULL
-    GROUP BY tipo_producto, categoria_agricola
+    WHERE producto_normalizado IS NOT NULL
+    GROUP BY producto_normalizado, categoria_agricola
     ORDER BY volume DESC
     """
     df_products = pd.read_sql(query, conn)
@@ -190,18 +190,18 @@ with tab3:
         with col1:
             st.subheader("Top 15 Most Imported Products")
             top_15 = df_products.head(15)
-            fig = px.bar(top_15, x='volume', y='tipo_producto', orientation='h',
+            fig = px.bar(top_15, x='volume', y='producto_normalizado', orientation='h',
                         color='categoria_agricola',
-                        labels={'volume': 'Volume', 'tipo_producto': 'Product'})
+                        labels={'volume': 'Volume', 'producto_normalizado': 'Product'})
             fig.update_layout(yaxis={'categoryorder':'total ascending'}, showlegend=False)
             st.plotly_chart(fig, use_container_width=True)
-        
+
         with col2:
             st.subheader("Bottom 15 Least Imported Products")
             bottom_15 = df_products.tail(15)
-            fig = px.bar(bottom_15, x='volume', y='tipo_producto', orientation='h',
+            fig = px.bar(bottom_15, x='volume', y='producto_normalizado', orientation='h',
                         color='categoria_agricola',
-                        labels={'volume': 'Volume', 'tipo_producto': 'Product'})
+                        labels={'volume': 'Volume', 'producto_normalizado': 'Product'})
             fig.update_layout(yaxis={'categoryorder':'total descending'}, showlegend=False)
             st.plotly_chart(fig, use_container_width=True)
         
@@ -229,7 +229,7 @@ with tab4:
         MAX(PRECIO_UNIDAD) as max_price,
         AVG(PRECIO_UNIDAD) as avg_price
     FROM flowers_greens
-    WHERE tipo_producto = 'Rosas'
+    WHERE producto_normalizado = 'Rosas'
     """
     df_overview = pd.read_sql(query_overview, conn)
 
@@ -258,7 +258,7 @@ with tab4:
             SUM(TOTAL_A_PAGAR) as total_value,
             COUNT(*) as shipments
         FROM flowers_greens
-        WHERE tipo_producto = 'Rosas' AND FECHA_IMPORTACION_EXPORTACION IS NOT NULL
+        WHERE producto_normalizado = 'Rosas' AND FECHA_IMPORTACION_EXPORTACION IS NOT NULL
         GROUP BY month
         ORDER BY month
         """
@@ -308,7 +308,7 @@ with tab4:
             MIN(FECHA_IMPORTACION_EXPORTACION) as first_import,
             MAX(FECHA_IMPORTACION_EXPORTACION) as last_import
         FROM flowers_greens
-        WHERE tipo_producto = 'Rosas' AND IMPORTADOR_EXPORTADOR IS NOT NULL
+        WHERE producto_normalizado = 'Rosas' AND IMPORTADOR_EXPORTADOR IS NOT NULL
         GROUP BY IMPORTADOR_EXPORTADOR
         ORDER BY volume DESC
         LIMIT 20
@@ -337,7 +337,7 @@ with tab4:
             FECHA_IMPORTACION_EXPORTACION as date,
             IMPORTADOR_EXPORTADOR as importer
         FROM flowers_greens
-        WHERE tipo_producto = 'Rosas'
+        WHERE producto_normalizado = 'Rosas'
           AND PRECIO_UNIDAD IS NOT NULL
           AND PRECIO_UNIDAD > 0
           AND PRECIO_UNIDAD < 1
@@ -372,7 +372,7 @@ with tab4:
             SUM(TOTAL_A_PAGAR) as total_value,
             ROUND(AVG(PRECIO_UNIDAD), 4) as avg_price
         FROM flowers_greens
-        WHERE tipo_producto = 'Rosas' AND PAIS_DE_PROCEDENCIA_DESTINO IS NOT NULL
+        WHERE producto_normalizado = 'Rosas' AND PAIS_DE_PROCEDENCIA_DESTINO IS NOT NULL
         GROUP BY PAIS_DE_PROCEDENCIA_DESTINO
         ORDER BY volume DESC
         LIMIT 15

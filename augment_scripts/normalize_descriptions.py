@@ -104,23 +104,52 @@ def normalize_product_descriptions():
         print("✓ Column already exists in flowers_greens")
     
     # Update flowers_greens with normalized names
+    # Apply same normalization logic directly to tipo_producto
     update_fg = """
     UPDATE flowers_greens
     SET producto_normalizado = CASE
-        -- Use catalogue normalized name if available
-        WHEN EXISTS (
-            SELECT 1 FROM catalogo_arancel c 
-            WHERE c.COD_INCISO = flowers_greens.COD_INCISO
-        ) THEN (
-            SELECT producto_normalizado 
-            FROM catalogo_arancel c 
-            WHERE c.COD_INCISO = flowers_greens.COD_INCISO
-        )
-        -- Fallback to tipo_producto
-        ELSE tipo_producto
+        -- Specific flower types
+        WHEN tipo_producto LIKE '%Rosas%' OR tipo_producto LIKE '%ROSAS%' THEN 'Rosas'
+        WHEN tipo_producto LIKE '%Claveles%' OR tipo_producto LIKE '%CLAVELES%' THEN 'Claveles'
+        WHEN tipo_producto LIKE '%Orquídeas%' OR tipo_producto LIKE '%ORQUIDEAS%' THEN 'Orquídeas'
+        WHEN tipo_producto LIKE '%Crisantemos%' OR tipo_producto LIKE '%CRISANTEMOS%' THEN 'Crisantemos'
+        WHEN tipo_producto LIKE '%Gerberas%' OR tipo_producto LIKE '%GERBERAS%' THEN 'Gerberas'
+        WHEN tipo_producto LIKE '%Gladiolas%' OR tipo_producto LIKE '%GLADIOLAS%' THEN 'Gladiolas'
+        WHEN tipo_producto LIKE '%Heliconias%' OR tipo_producto LIKE '%HELICONIAS%' THEN 'Heliconias'
+        WHEN tipo_producto LIKE '%Anturios%' OR tipo_producto LIKE '%ANTURIOS%' THEN 'Anturios'
+        WHEN tipo_producto LIKE '%Astromerias%' OR tipo_producto LIKE '%ASTROMERIAS%' THEN 'Astromerias'
+
+        -- Generic "Los demás" / "Otros" in flowers (Chapter 6, Partida 603)
+        WHEN (tipo_producto LIKE '%demás%' OR tipo_producto LIKE '%otros%' OR tipo_producto LIKE '%otras%')
+             AND categoria_agricola = 'Flores'
+             THEN 'Flores Frescas - Otras Variedades'
+
+        -- Generic in foliage/plants
+        WHEN (tipo_producto LIKE '%demás%' OR tipo_producto LIKE '%otros%' OR tipo_producto LIKE '%otras%')
+             AND (categoria_agricola = 'Follaje' OR tipo_producto LIKE '%Follaje%')
+             THEN 'Follaje y Ramas - Otros'
+
+        -- Generic in vegetables (Chapter 7)
+        WHEN (tipo_producto LIKE '%demás%' OR tipo_producto LIKE '%otros%' OR tipo_producto LIKE '%otras%')
+             AND (categoria_agricola = 'Vegetales' OR tipo_producto LIKE '%Hortalizas%' OR tipo_producto LIKE '%plantas%')
+             THEN 'Vegetales - Hortalizas, plantas, raíces  y'
+
+        -- Generic in fruits (Chapter 8)
+        WHEN (tipo_producto LIKE '%demás%' OR tipo_producto LIKE '%otros%' OR tipo_producto LIKE '%otras%')
+             AND (categoria_agricola = 'Frutas' OR tipo_producto LIKE '%frutos%' OR tipo_producto LIKE '%frutas%')
+             THEN 'Frutas - Las frutas y otros frutos refr'
+
+        -- Clean up leading dashes and spaces
+        WHEN tipo_producto LIKE '- - - - %' THEN TRIM(SUBSTR(tipo_producto, 9))
+        WHEN tipo_producto LIKE '- - - %' THEN TRIM(SUBSTR(tipo_producto, 7))
+        WHEN tipo_producto LIKE '- - %' THEN TRIM(SUBSTR(tipo_producto, 5))
+        WHEN tipo_producto LIKE '- %' THEN TRIM(SUBSTR(tipo_producto, 3))
+
+        -- Keep original if already specific
+        ELSE TRIM(tipo_producto)
     END
     """
-    
+
     conn.execute(update_fg)
     conn.commit()
     print("✓ Updated flowers_greens with normalized names")
